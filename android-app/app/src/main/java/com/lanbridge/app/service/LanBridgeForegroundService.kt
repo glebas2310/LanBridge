@@ -59,6 +59,7 @@ class LanBridgeForegroundService : LifecycleService(), LanBridgeMessageListener 
         private const val NOTIFICATION_TRANSFER_ID = 1002
 
         const val ACTION_START = "com.lanbridge.app.action.START"
+        const val ACTION_STOP = "com.lanbridge.app.action.STOP"
         const val ACTION_DISCONNECT = "com.lanbridge.app.action.DISCONNECT"
         const val ACTION_RECONNECT = "com.lanbridge.app.action.RECONNECT"
         const val ACTION_PAIR = "com.lanbridge.app.action.PAIR"
@@ -118,6 +119,12 @@ class LanBridgeForegroundService : LifecycleService(), LanBridgeMessageListener 
         startForegroundWithTypes(getString(R.string.notification_discovering))
 
         when (intent?.action) {
+            ACTION_STOP -> {
+                webSocketClient?.disconnect()
+                stopForeground(STOP_FOREGROUND_REMOVE)
+                stopSelf()
+                return START_NOT_STICKY
+            }
             ACTION_DISCONNECT -> {
                 webSocketClient?.disconnect()
                 _connectionState.value = ConnectionState.Disconnected
