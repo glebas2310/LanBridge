@@ -41,11 +41,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LanBridge">
 
-        <!-- App Shortcuts -->
-        <meta-data
-            android:name="android.app.shortcuts"
-            android:resource="@xml/shortcuts.xml" />
-
         <!-- Main Dashboard UI Activity -->
         <activity
             android:name=".ui.MainActivity"
@@ -56,6 +51,11 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- App Shortcuts -->
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
 
         <!-- QR Code Scanner for Pairing -->
