@@ -1,0 +1,100 @@
+name: LanBridge CI/CD Build
+
+on:
+  push:
+    branches: [ "main", "master" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    name: Build Windows 11 Desktop (.NET 8 WPF)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore NuGet Packages
+        run: dotnet restore desktop-win11/LanBridge.csproj
+
+      - name: Build Windows Application
+        run: dotnet build desktop-win11/LanBridge.csproj -c Release --no-restore
+
+      - name: Publish Self-Contained Single-File Executable
+        run: >
+          dotnet publish desktop-win11/LanBridge.csproj
+          -c Release
+          -r win-x64
+          --self-contained true
+          -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true
+          -p:EnableCompressionInSingleFile=true
+          -o release-win
+
+      - name: Rename to LanBridge-Win11.exe
+        shell: pwsh
+        run: |
+          if (Test-Path "release-win\LanBridge.exe") {
+            Move-Item "release-win\LanBridge.exe" "release-win\LanBridge-Win11.exe" -Force
+          }
+
+      - name: Upload Windows Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LanBridge-Win11
+          path: release-win/LanBridge-Win11.exe
+          if-no-files-found: error
+
+  build-android:
+    name: Build Android APK (Jetpack Compose)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Java Development Kit (JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Cache Gradle Packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('android-app/**/*.gradle*', 'android-app/**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Grant Execute Permission to Gradlew
+        run: chmod +x android-app/gradlew
+
+      - name: Build Android Debug & Release APK
+        working-directory: android-app
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Prepare Android Artifact
+        run: |
+          mkdir -p release-android
+          cp android-app/app/build/outputs/apk/debug/app-debug.apk release-android/LanBridge-Android.apk
+
+      - name: Upload Android Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: LanBridge-Android
+          path: release-android/LanBridge-Android.apk
+          if-no-files-found: error

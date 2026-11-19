@@ -1,0 +1,58 @@
+<resources>
+    <string name="app_name">LanBridge</string>
+    <string name="action_send_to_pc">На ПК (LanBridge)</string>
+    <string name="tile_label">Буфер на ПК</string>
+    <string name="shortcut_send_clipboard">Буфер на ПК</string>
+    <string name="shortcut_send_clipboard_long">Отправить буфер обмена на ПК</string>
+    <string name="shortcut_scan_qr">Сканировать QR</string>
+    <string name="shortcut_scan_qr_long">Подключить ПК по QR-коду</string>
+
+    <!-- Notification Strings -->
+    <string name="notification_channel_name">Служба синхронизации LanBridge</string>
+    <string name="notification_channel_desc">Отображает текущий статус подключения и передачи данных с ПК</string>
+    <string name="notification_transfer_channel_name">Передача файлов</string>
+    <string name="notification_transfer_channel_desc">Отображает прогресс передачи файлов</string>
+    <string name="notification_disconnected">LanBridge: Не подключено</string>
+    <string name="notification_discovering">Поиск ПК в локальной сети…</string>
+    <string name="notification_connecting">Подключение к %1$s…</string>
+    <string name="notification_connected">Подключено к %1$s (%2$s)</string>
+    <string name="notification_action_disconnect">Отключиться</string>
+    <string name="notification_action_reconnect">Подключиться</string>
+
+    <!-- UI Strings -->
+    <string name="status_connected">Подключено</string>
+    <string name="status_connecting">Подключение…</string>
+    <string name="status_discovering">Поиск устройства…</string>
+    <string name="status_disconnected">Отключено</string>
+    <string name="status_auth_failed">Ошибка авторизации</string>
+    <string name="no_paired_pc">ПК не привязан</string>
+    <string name="tap_to_pair">Нажмите «Сканировать QR» на экране ПК</string>
+    <string name="action_scan_qr">Сканировать QR</string>
+    <string name="action_send_file">Отправить файл</string>
+    <string name="action_send_clipboard">Отправить буфер</string>
+    <string name="history_title">История обмена</string>
+    <string name="history_empty">История пуста. Скопируйте текст или передайте файл.</string>
+    <string name="btn_copy">Скопировать</string>
+    <string name="copied_to_clipboard">Скопировано в буфер обмена</string>
+    <string name="text_sent">Текст отправлен на ПК</string>
+    <string name="image_sent">Изображение отправлено на ПК</string>
+    <string name="file_sent">Файл отправлен на ПК</string>
+    <string name="clipboard_empty">Буфер обмена пуст</string>
+    <string name="not_connected_warning">Нет подключения к ПК</string>
+    <string name="paired_device_title">Привязанный ПК</string>
+    <string name="device_name_label">Имя устройства:</string>
+    <string name="device_id_label">ID устройства:</string>
+    <string name="fingerprint_label">Отпечаток сертификата:</string>
+    <string name="action_unpair">Забыть устройство</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="qr_scanner_title">Сканирование QR-кода</string>
+    <string name="qr_scanner_hint">Наведите камеру на QR-код в приложении LanBridge на ПК</string>
+    <string name="camera_permission_required">Для сканирования QR-кода необходим доступ к камере</string>
+    <string name="grant_permission">Предоставить доступ</string>
+    <string name="qr_invalid">Неверный формат QR-кода LanBridge</string>
+    <string name="pairing_success">ПК успешно привязан!</string>
+    <string name="downloading_file">Загрузка файла: %1$s</string>
+    <string name="uploading_file">Отправка файла: %1$s</string>
+    <string name="transfer_completed">Передача завершена</string>
+    <string name="transfer_failed">Ошибка передачи файла</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="send_clipboard"
+        android:enabled="true"
+        android:icon="@drawable/ic_tile_clipboard"
+        android:shortcutShortLabel="@string/shortcut_send_clipboard"
+        android:shortcutLongLabel="@string/shortcut_send_clipboard_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.lanbridge.app"
+            android:targetClass="com.lanbridge.app.ui.TransparentClipboardActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="scan_qr"
+        android:enabled="true"
+        android:icon="@drawable/ic_qr_scan"
+        android:shortcutShortLabel="@string/shortcut_scan_qr"
+        android:shortcutLongLabel="@string/shortcut_scan_qr_long">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.lanbridge.app"
+            android:targetClass="com.lanbridge.app.ui.QrScannerActivity" />
+    </shortcut>
+</shortcuts>
